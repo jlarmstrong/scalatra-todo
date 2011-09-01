@@ -1,0 +1,164 @@
+html {
+    text-align: center;
+    padding: 85px;
+}
+
+body {
+    text-align: left;
+    font-family: Helvetica;
+    margin: auto;
+    width: 500px;
+    color: #555;
+    font-size:11px;
+
+}
+
+h1 {
+    font-size: 35px;
+}
+
+h1 a {
+    text-decoration: none;
+    color: #555;
+}
+
+h1 a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#app {
+    margin: 25px auto 25px auto;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li a {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+ul li a:hover {
+    background: #eee;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 3px;
+    font-size: 15px;
+}
+
+input[name=title] {
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 15px;
+    padding: 7px;
+}
+
+textarea[name=body] {
+    width: 100%;
+    height: 300px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    padding: 7px;
+}
+
+button {
+    font-size: 19px;
+    padding: 5px 10px;
+}
+
+#notice {
+    height: 25px;
+    font-size: 15px;
+    margin: 15px 0 15px 0;
+}
+
+#notice .success, #notice .error {
+    color: green;
+    width: 100%;
+    border: 1px solid #ddd;
+    background: #eee;
+    padding: 5px;
+}
+
+#notice .error {
+    color: red;
+}
+
+
+html, body, div.window {
+width:100%;
+height:100%;
+margin:0;
+padding:0;
+}
+
+div.top-nav {
+
+}
+
+div.left-nav {
+ width: 200px;
+ background-color: yellow;
+ float:left;
+}
+
+div.right-nav {
+
+  left: 200px;
+  background: #CCC;
+  margin-left:5px;
+}
+
+.dialog label {
+    width:110px;
+    float:left;
+}
+
+.dialog input, .dialog textarea {
+    font-family: Courier;
+    font-size: 11px;
+}
+
+.dialog div.input {
+    clear:both;
+}
+
+table.items-table th {
+    max-width: 100%;
+    text-align:left;
+}
+table.items-table th.name {
+    min-width: 220px;
+}
+table.items-table th.category {
+    width: 220px;
+}
+table.items-table th.type {
+    width: 120px;
+}
+table.items-table th.actions {
+    width: 120px;
+}
+
+table.items-table td {
+   padding:2px;
+}
+
