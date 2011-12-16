@@ -1,9 +1,14 @@
+package todo
+
 import org.scalatra.auth.{ScentryConfig, ScentrySupport}
 import org.scalatra.ScalatraKernel
 import org.scalatra.auth.strategy.{BasicAuthStrategy, BasicAuthSupport}
 import org.scalatra.auth.{ScentrySupport, ScentryConfig}
 import org.scalatra.{CookieSupport, ScalatraKernel, CookieOptions, Cookie}
 import org.slf4j.{LoggerFactory}
+
+import todo.models._
+import todo.strategies._
 
 trait AuthenticationSupport extends ScentrySupport[User] with BasicAuthSupport[User] { self: ScalatraKernel =>
 
@@ -19,7 +24,7 @@ trait AuthenticationSupport extends ScentrySupport[User] with BasicAuthSupport[U
 
   override protected def registerAuthStrategies = {
     scentry.registerStrategy('UserPassword, app ⇒ new UserPasswordStrategy(app))
-    scentry.registerStrategy('RememberMe, app ⇒ new RememberMeStrategy(app.asInstanceOf[ScalatraKernel with CookieSupport]))
+    //scentry.registerStrategy('RememberMe, app ⇒ new RememberMeStrategy(app.asInstanceOf[ScalatraKernel with CookieSupport]))
   }
 
   override protected def configureScentry = {

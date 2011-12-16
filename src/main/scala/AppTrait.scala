@@ -1,3 +1,5 @@
+package todo
+
 import org.scalatra._
 import java.net.URL
 import scalate.ScalateSupport
@@ -7,7 +9,11 @@ import net.liftweb.json._
 import net.liftweb.mongodb.record.MongoRecord
 import javax.servlet._
 
-class AppTrait extends ScalatraServlet 
+import _root_.akka.dispatch._
+import org.scalatra.akka.AkkaSupport
+
+class AppTrait extends ScalatraServlet
+  with AkkaSupport
  with AuthenticationSupport
  with FlashMapSupport
  with ScalateSupport 

@@ -1,3 +1,7 @@
+package todo.models
+
+import com.foursquare.rogue.Rogue._
+
 import java.util.regex.Pattern
 import net.liftweb.mongodb.record._
 import net.liftweb.mongodb.record.field._
@@ -5,46 +9,52 @@ import net.liftweb.record.field._
 import net.liftweb.record._
 import org.bson.types._
 import org.joda.time.{DateTime, DateTimeZone}
-import net.liftweb.mongodb.record.MongoRecord
-import net.liftweb.json.DefaultFormats
+import java.util.{Date, Calendar}
+import net.liftweb.json.JsonParser._
+import net.liftweb.json._
 import net.liftweb.json.JsonDSL._
-import net.liftweb.json.JsonAST.JObject
-import java.security.SecureRandom
-import java.util.Date
-import com.foursquare.rogue.Rogue._
+import com.mongodb._
+import net.liftweb.mongodb.record.MongoRecord
+
+import todo.models.User
 
 object Todos {
-  
-  def getOpenByUserId(uid: String): List[Todo] = getOpenByUserId(new ObjectId(uid))
-  def getOpenByUserId(uid: ObjectId): List[Todo] = {
-    
-  }
-  
-  def getAllByUserId(uid: String): List[Todo] = getAllByUserId(new ObjectId(uid))  
-  def getAllByUserId(uid: ObjectId): List[Todo] = {
-    
-  }
-  
-  def save(j: JObject,uid: ObjectId): Todo {
-    val t = Todo.createRecord
-          .done(false)
-          .priority(j.values("priority").toInt)
-          .desc(j.values.toString)
 
-    t.ownerId.set(uid)
-    
-    t.save
+  def getOpenByUserId(uid: String): List[Todo] = getOpenByUserId(new ObjectId(uid))
+
+  def getOpenByUserId(uid: ObjectId): List[Todo] = {
+    Todo where(_.ownerId eqs uid) and(_.done eqs false) fetch()
   }
-  
-  def update(tid: Objectid,j: JObject,uid: ObjectId) {
+
+  def getAllByUserId(uid: String): List[Todo] = getAllByUserId(new ObjectId(uid))
+
+  def getAllByUserId(uid: ObjectId): List[Todo] = {
+    Todo where(_.ownerId eqs uid) fetch()
+  }
+
+  def save(j: JObject, uid: ObjectId): Todo = {
+
+
+    val item = Todo.createRecord
+      .done(false)
+      .priority(j.values("priority").toString.toInt)
+
+      item.shortdesc.set(j.values.toString)
+
+      item.ownerId.set(uid)
+
+    item.save
+  }
+
+  def update(tid: ObjectId, j: JObject, uid: ObjectId) {
     (
       Todo
-        .where(_.id eqs tid).and(_.ownerId eqs uid)
-        .modify(_.done setTo check2bool(j.values("done"))).and(_.priority setTo j.values("priority").toInt).and(_.desc setTo j.values.toString).and(_.modified_at setTo Calendar.getInstance)
+        .where(_._id eqs tid).and(_.ownerId eqs uid)
+        .modify(_.done setTo check2bool(j.values("done").toString)).and(_.priority setTo j.values("priority").toString.toInt).and(_.shortdesc setTo j.values.toString).and(_.modified_at setTo Calendar.getInstance)
         .updateOne()
-    )
+      )
   }
-  
+
   def asPubJSON(items: List[Todo]) = {
     compact(render(JArray(items.map(_.asPubJValue))))
   }
@@ -52,8 +62,8 @@ object Todos {
   def asPubJSON(items: Todo) = {
     compact(render(items.asPubJValue))
   }
-  
-  def check2bool(s: String): Boolean ={
+
+  def check2bool(s: String): Boolean = {
     s match {
       case "true" => true
       case "yes" => true
@@ -62,36 +72,32 @@ object Todos {
       case _ => false
     }
   }
-  
+
 }
 
 class Todo extends MongoRecord[Todo] with MongoId[Todo] {
   def meta = Todo
 
   object done extends BooleanField(this)
-  object ownerId extends ObjectField(this, User)
+
+  object ownerId extends ObjectIdField(this) {
+    def fetch = User.find("id", value)
+  }
+
   object priority extends IntField(this) {
     override def defaultValue = 5
-    override def validations = validPriority _ :: super.validations
-
-    def validPriority(in: Int): List[FieldError] = 
-    if (in > 0 && in <=10) Nil
-    else List(FieldError(this, <b>Priority must be 1-10</b>))
-
-    override def _toForm = Full(select(ToDo.priorityList,
-                                                Full(is.toString),
-                                                f => set(f.toInt)))
   }
-  object shortdesc extends StringField(this, 128) {
+
+  object shortdesc extends StringField(this, 128) /* {
     override def validations =
-    valMinLen(3, "Description must be 3 characters") _ :: super.validations
-  }
-  
+      valMinLen(3, "Description must be 3 characters") _ :: super.validations
+  }                                                 */
+
   object created_at extends DateTimeField(this)
 
   object modified_at extends DateTimeField(this)
 
-  
+
   def asPubJValue: JValue = {
     super.asJValue transform {
       case JObject(xs) => JObject(xs filterNot (Seq("userId") contains _.name))
@@ -100,9 +106,9 @@ class Todo extends MongoRecord[Todo] with MongoId[Todo] {
 }
 
 object Todo extends Todo with MongoMetaRecord[Todo] {
-  override def save = {
+  /*override def save = {
     this.created_at(Calendar.getInstance)
     this.modified_at(Calendar.getInstance)
     super.save
-  }
+  } */
 }

@@ -1,4 +1,3 @@
-package name.jaredarmstrong
 package todo
 
 
@@ -8,12 +7,13 @@ import todo.models._
 class MyScalatraServlet extends AppTrait
  with TodosServlet
  {
-  
+
+  /*
   override def initialize(config: ServletConfig): Unit = {
     MongoDB.defineDb(DefaultMongoIdentifier, MongoAddress(MongoHost("127.0.0.1", 27017), "scalatra-todo"))
     
     super.initialize(config)
-  }
+  }   */
   
   before() {
     if (!isAuthenticated) {
@@ -21,7 +21,7 @@ class MyScalatraServlet extends AppTrait
     }
   }
 
-  get("/") {
+  asyncGet("/") {
     <html>
       <body>
         <h1>Hello, world!</h1>
@@ -31,7 +31,7 @@ class MyScalatraServlet extends AppTrait
     </html>
   }
 
-  get("/login") {
+  asyncGet("/login") {
     redirectIfAuthenticated
     
     contentType = "text/html"
@@ -50,7 +50,7 @@ class MyScalatraServlet extends AppTrait
     </html>
   }
 
-  post("/login") {
+  asyncPost("/login") {
     scentry.authenticate('UserPassword)
     
     if (isAuthenticated) {
@@ -61,7 +61,7 @@ class MyScalatraServlet extends AppTrait
     }
   }
 
-  get("/loggedin") {
+  asyncGet("/loggedin") {
     redirectIfNotAuthenticated
     
     contentType = "text/html"
@@ -74,7 +74,7 @@ class MyScalatraServlet extends AppTrait
     </html>
   }
 
-  get("/register") {
+  asyncGet("/register") {
     contentType = "text/html"
 
     <html>
@@ -89,7 +89,7 @@ class MyScalatraServlet extends AppTrait
     </html>	
   }
 
-  post("/register") {
+  asyncPost("/register") {
     val u = User.createRecord
       .username(params("userName"))
       .password(params("password"))
@@ -99,8 +99,8 @@ class MyScalatraServlet extends AppTrait
     
     redirect("/login")
   }
-  
-  get("/logout/?") {
+
+  asyncGet("/logout/?") {
     logOut
     
     redirect("/logout_step")

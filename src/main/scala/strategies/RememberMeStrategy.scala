@@ -1,3 +1,4 @@
+package todo.strategies
 
 import org.scalatra.auth.ScentryStrategy
 import org.scalatra.{CookieSupport, ScalatraKernel, CookieOptions, Cookie}
@@ -6,6 +7,7 @@ import javax.servlet.http.{Cookie ⇒ ServletCookie}
 import net.liftweb.common.{Box, Empty, Failure, Full}
 import org.slf4j.{LoggerFactory}
 
+import todo.models._
 
 /**
  * Authentication strategy to authenticate a user from a cookie.

@@ -33,90 +33,49 @@ html {
 }
   body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 100%;
+    font-size: 14px;
     line-height: 1.4em;
-    background: #eeeeee url(/images/pusher-logo.png) 20% -200px no-repeat;
+    background: #eeeeee;
     color: #333333;
   }
 
 #todoapp {
-  width: 40%;
+  width: 480px;
   margin: 0 auto 40px;
   background: white;
+  padding: 20px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
   box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
 }
-  #todoapp .title {
-    margin: 0 0 10px;
+  #todoapp h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 0 30px 0;
+    line-height: 1;
   }
 
-    #todoapp .title h1 {
-      font-size: 36px;
-      font-weight: bold;
-      text-align: center;
-      padding: 20px 0 30px;
-      line-height: 1;
-    }
-
-    #todoapp .title p {
-      border-left: 2px solid #000;
-      border-right: 2px solid #000;
-      background: #333;
-      color: #fff;
-      padding: 20px 2%;
-      text-align: center;
-      display: block;
-    }
-  
-      #todoapp .title p input {
-        border: 1px solid #000;
-        background: #444;
-        color: #eee;
-        margin: 0.75em -3px 0;
-        padding: 10px 1%;
-        width: 94%;
-        -webkit-border-radius: 0.5em;
-        -moz-border-radius: 0.5em;
-        border-radius: 0.5em;
-        text-align: center;
-        cursor: text;
-        font-size: 1.1em;
-      }
-
-#todoapp .content {
-  display: block;
-  position: relative;
-  padding: 20px 4%;
-  width: 92%;
-}
-
 #create-todo {
-  display: block;
   position: relative;
 }
   #create-todo input {
-    display: block;
-    position: relative;
-    width: 96%;
+    width: 466px;
     font-size: 24px;
     font-family: inherit;
     line-height: 1.4em;
     border: 0;
     outline: none;
-    padding: 6px 2%;
-    margin: 0;
+    padding: 6px;
     border: 1px solid #999999;
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
   }
-    #create-todo input.working,
     #create-todo input::-webkit-input-placeholder {
       font-style: italic;
-      color: darkGray;
     }
   #create-todo span {
     position: absolute;
@@ -135,7 +94,6 @@ html {
     font-size: 24px;
     line-height: 1.1em;
     border-bottom: 1px solid #cccccc;
-    display: block;
   }
     #todo-list li:after {
       content: "\0020";
@@ -157,14 +115,14 @@ html {
       display: block;
     }
     #todo-list .editing input {
-      width: 92%;
+      width: 444px;
       font-size: 24px;
       font-family: inherit;
       margin: 0;
       line-height: 1.6em;
       border: 0;
       outline: none;
-      padding: 10px 3% 0px 5%;
+      padding: 10px 7px 0px 27px;
       border: 1px solid #999999;
       -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
       -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
@@ -177,44 +135,26 @@ html {
     margin: 0 10px 0 7px;
     float: left;
   }
-  #todo-list .done .todo-content {
+  #todo-list .done .todo-text {
     text-decoration: line-through;
     color: #777777;
   }
   #todo-list .todo-destroy {
     position: absolute;
     right: 5px;
-    top: 18px;
+    top: 14px;
     display: none;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
-    background: url(/images/delete.png) no-repeat 0 -25px;
+    width: 20px;
+    height: 20px;
+    background: url(destroy.png) no-repeat 0 0;
   }
-    #todo-list .todo:hover .todo-destroy {
+    #todo-list li:hover .todo-destroy {
       display: block;
     }
     #todo-list .todo-destroy:hover {
-      background-position: 0 0;
+      background-position: 0 -20px;
     }
-
-  #todo-list .todo-edit {
-    position: absolute;
-    right: 35px;
-    top: 18px;
-    display: none;
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    background: url(/images/edit.png) no-repeat 0 -25px;
-  }
-    #todo-list .todo:hover .todo-edit {
-      display: block;
-    }
-    #todo-list .todo-edit:hover {
-      background-position: 0 0px;
-    }
-
 
 #todo-stats {
   *zoom: 1;
@@ -247,73 +187,34 @@ html {
         color: #777777;
       }
       #todo-stats .todo-clear a:hover {
-        color: #107BD6;
+        color: #336699;
       }
 
 #instructions {
-  width: 40%;
+  width: 520px;
   margin: 10px auto;
   color: #777777;
-  text-shadow: rgba(255, 255, 255, 0.8) 0 1px 1px;
+  text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
   text-align: center;
-  border-top: 1px solid #d0d0d0;
 }
-  #instructions p {
-    display: block;
-    border-top: 1px solid #fff;
-    padding: 1em 0 0 0;
-  }
   #instructions a {
     color: #336699;
-    text-decoration: underline;
-  }
-  
-  #instructions a:hover, #instructions a:focus {
-    color: #107BD6;
-    text-decoration: none;
   }
 
 #credits {
-  border-top: 1px solid #d0d0d0;
-  width: 40%;
-  margin: 1em auto;
+  width: 520px;
+  margin: 30px auto;
   color: #999;
-  text-shadow: rgba(255, 255, 255, 0.8) 0 1px 1px;
+  text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
   text-align: center;
 }
-  #credits p {
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #d0d0d0;
-    padding: 1em 0;
-    width: 50%;
-    display: block;
-    float: left;
-  }
-  
-  #credits p.wide {
-    border-top: 1px solid #fff;
-    border-bottom: medium none;
-    width: 100%;
-    display: block;
-    float: none;
-    clear: both;
-    text-align: center;
-    font-size: smaller;
-  }
-  
   #credits a {
     color: #888;
-    text-decoration: underline;
-  }
-  
-  #credits a:hover, #credits a:focus {
-    color: #444;
-    text-decoration: none;
   }
 
 
 /*
- *  François 'cahnory' Germain
+ *  FranÃ§ois 'cahnory' Germain
  */
 .ui-tooltip, .ui-tooltip-top, .ui-tooltip-right, .ui-tooltip-bottom, .ui-tooltip-left {
   color:#ffffff;
@@ -407,24 +308,4 @@ html {
   -moz-transform:rotate(180deg);
   -khtml-transform:rotate(180deg);
   -webkit-transform:rotate(180deg);
-}
-
-
-@media (max-width: 900px){
-  body{
-    background: #eeeeee url(/images/pusher-logo.png) -40% -200px no-repeat;
-  }
-  #todoapp, #instructions, #credits {
-    width: 70%;
-  }
-}
-
-@media (max-width: 720px){
-  body {
-    font-size: 0.8em;
-  }
-
-  #todoapp, #instructions, #credits {
-    width: 100%;
-  }
 }

@@ -1,3 +1,5 @@
+package todo.models
+
 import java.util.regex.Pattern
 import net.liftweb.mongodb.record._
 import net.liftweb.mongodb.record.field._

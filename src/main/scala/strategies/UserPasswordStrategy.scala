@@ -1,3 +1,4 @@
+package todo.strategies
 
 import org.scalatra.auth.ScentryStrategy
 import org.scalatra.ScalatraKernel
@@ -9,6 +10,8 @@ import java.nio.charset.Charset
 import java.util.Locale
 import javax.servlet.http.{ HttpServletRequest}
 import org.slf4j.{LoggerFactory}
+
+import todo.models._
 
 /**
  * Authentication strategy to authenticate a user from a username (or email) and password combination.
