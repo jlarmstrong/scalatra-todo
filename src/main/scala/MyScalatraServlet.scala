@@ -69,7 +69,7 @@ class MyScalatraServlet extends AppTrait
     <html>
       <body>
       <h1>Hello, world!</h1>
-      Welcome {user.username} you are logged in. <a href="/logout">Logout</a>
+      Welcome {user.username} you are logged in <a href="/todo">todos</a>. <a href="/logout">Logout</a>
       </body>
     </html>
   }
