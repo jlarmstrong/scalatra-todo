@@ -2,7 +2,11 @@ package todo
 
 
 import org.scalatra._
+import java.net.URL
 import todo.models._
+
+import _root_.akka.dispatch._
+import org.scalatra.akka.AkkaSupport
 
 class MyScalatraServlet extends AppTrait
  with TodosServlet
@@ -112,6 +116,23 @@ class MyScalatraServlet extends AppTrait
   }
 
   notFound {
+
+
+      resourceNotFound()
+
+      // If no route matches, then try to render a Scaml template
+      val templateBase = requestPath match {
+        case s if s.endsWith("/") => s + "index"
+        case s => s
+      }
+      val templatePath = "/WEB-INF/scalate/views/" + templateBase + ".ssp"
+
+      servletContext.getResource(templatePath) match {
+        case url: URL =>
+          contentType = "text/html"
+          templateEngine.layout(templatePath)
+        case _ =>
           response.sendError(404)
-  }
+      }
+    }
 }

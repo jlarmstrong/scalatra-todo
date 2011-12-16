@@ -10,6 +10,8 @@ sbtVersion := "0.11.2"
 
 seq(webSettings: _*)
 
+logLevel := Level.Info
+
 libraryDependencies ++= Seq(
   "org.scalatra" %% "scalatra" % "2.1.0-SNAPSHOT",
   "org.scalatra" %% "scalatra-scalate" % "2.1.0-SNAPSHOT",

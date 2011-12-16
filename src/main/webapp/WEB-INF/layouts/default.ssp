@@ -1,3 +1,4 @@
+<%@ var body: String %>
 <!DOCTYPE html>
 <html>
 <head>
